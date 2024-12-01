@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/products')]
 class ProductController extends AbstractController
@@ -52,7 +53,7 @@ class ProductController extends AbstractController
     #[Route('/{id}', methods: ['GET'])]
     public function show(Product $product): JsonResponse
     {
-        // Manually convert the product to an array
+
         $data = [
             'id' => $product->getId(),
             'name' => $product->getName(),
@@ -70,7 +71,7 @@ class ProductController extends AbstractController
 
     // Create a new product
     #[Route('', methods: ['POST'])]
-    public function create(Request $request): JsonResponse
+    public function create(Request $request, ValidatorInterface $validator): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 
@@ -89,7 +90,17 @@ class ProductController extends AbstractController
             ->setDescription($data['description'] ?? null)
             ->setPrice($data['price'])
             ->setCategory($category)
-            ->setCreatedAt(new \DateTimeImmutable()); // Automatically set created_at
+            ->setCreatedAt(new \DateTimeImmutable());
+        // Use Validator 
+        $errors = $validator->validate($product);
+        if (count($errors) > 0) {
+            $errorMessages = [];
+            foreach ($errors as $error) {
+                $errorMessages[] = $error->getMessage();
+            }
+            return new JsonResponse(['errors' => $errorMessages], 400);
+        }
+
 
         $this->entityManager->persist($product);
         $this->entityManager->flush();
@@ -109,7 +120,7 @@ class ProductController extends AbstractController
 
     // Update a product
     #[Route('/{id}', methods: ['PUT'])]
-    public function update(Request $request, Product $product): JsonResponse
+    public function update(Request $request, Product $product, ValidatorInterface $validator): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 
@@ -131,6 +142,15 @@ class ProductController extends AbstractController
                 return new JsonResponse(['error' => 'Invalid category'], 400);
             }
             $product->setCategory($category);
+        }
+        // Use Validator 
+        $errors = $validator->validate($product);
+        if (count($errors) > 0) {
+            $errorMessages = [];
+            foreach ($errors as $error) {
+                $errorMessages[] = $error->getMessage();
+            }
+            return new JsonResponse(['errors' => $errorMessages], 400);
         }
 
         $this->entityManager->flush();

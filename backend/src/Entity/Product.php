@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
@@ -15,15 +16,21 @@ class Product
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Product name is required.")]
+    #[Assert\Length(max: 255, maxMessage: "Product name cannot exceed 255 characters.")]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+
     private ?string $description = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::FLOAT)]
+    #[Assert\NotBlank(message: "Product price is required.")]
+    #[Assert\Positive(message: "Product price must be greater than 0.")]
     private ?float $price = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
+    #[Assert\NotNull(message: "Category must be provided.")]
     private ?Category $category = null;
 
     #[ORM\Column]

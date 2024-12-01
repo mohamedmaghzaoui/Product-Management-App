@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/categories')]
 class CategoryController extends AbstractController
@@ -55,7 +56,7 @@ class CategoryController extends AbstractController
 
     // Create a new category
     #[Route('', methods: ['POST'])]
-    public function create(Request $request): JsonResponse
+    public function create(Request $request, ValidatorInterface $validator): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 
@@ -65,6 +66,15 @@ class CategoryController extends AbstractController
 
         $category = new Category();
         $category->setName($data['name']);
+        // Use Validator 
+        $errors = $validator->validate($category);
+        if (count($errors) > 0) {
+            $errorMessages = [];
+            foreach ($errors as $error) {
+                $errorMessages[] = $error->getMessage();
+            }
+            return new JsonResponse(['errors' => $errorMessages], 400);
+        }
 
         $this->entityManager->persist($category);
         $this->entityManager->flush();
