@@ -28,6 +28,7 @@ class ProductController extends AbstractController
     #[Route('', methods: ['GET'])]
     public function index(): JsonResponse
     {
+        //get all products
         $products = $this->repository->findAll();
 
 
@@ -74,6 +75,7 @@ class ProductController extends AbstractController
     public function create(Request $request, ValidatorInterface $validator): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
+
 
         if (!isset($data['name'], $data['price'], $data['category'])) {
             return new JsonResponse(['error' => 'Name, price, and category are required'], 400);
