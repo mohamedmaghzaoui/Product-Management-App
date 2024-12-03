@@ -1,20 +1,20 @@
 
-
-import './index.css';
-
-
+import { Products } from "./components/Product";
+import { Categories } from "./components/Category";
 function App() {
+  return <div style={{fontFamily:"Nunito"}} >
+<div className="flex justify-center space-x-2 p-2">
+  <div className="w-1/2 me-20">
+    <Products />
+  </div>
+  <div className="w-1/3">
+    <Categories />
+  </div>
+</div>
 
 
-  return (
-    <>
 
-<h1 className="text-green-900 text-5xl">
-      Hello world!
-    </h1>
-        
-    </>
-  )
+  </div>
 }
 
-export default App
+export default App;
