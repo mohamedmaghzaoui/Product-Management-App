@@ -148,24 +148,27 @@ export const Products = () => {
                 <td className="border-b-2 border-l-2 border-r-2 py-4 px-2 text-center">{product.description}</td>
                 <td className="border-b-2 border-l-2 border-r-2 py-4 px-2 text-center">{product.price}</td>
                 <td className="border-b-2 border-l-2 border-r-2 py-4 px-2 text-center">{product.category.name}</td>
-                <td className="border-b-2 border-l-2 border-r-2 py-4 px-2 text-center">
-                  <button
-                    onClick={() => {
-                      setCurrentProduct(product);
-                      setIsEditing(true);
-                      setShowModal(true);
-                    }}
-                    className="p-2 bg-[#219CFF] text-white rounded-md hover:bg-blue-600"
-                  >
-                    <FaEdit />
-                  </button>
-                  <button
-                    onClick={() => handleDeleteProduct(product.id)}
-                    className="p-2 ml-2 bg-[#FF724F] text-white rounded-md hover:bg-red-600"
-                  >
-                    <MdDelete />
-                  </button>
-                </td>
+                <td className="border-b-2 border-l-2 border-r-2 py-4 px-2 text-center align-middle">
+  <div className="flex flex-row justify-center items-center space-x-2">
+    <button
+      onClick={() => {
+        setCurrentProduct(product);
+        setIsEditing(true);
+        setShowModal(true);
+      }}
+      className="p-2 bg-[#219CFF] text-white rounded-md hover:bg-blue-600"
+    >
+      <FaEdit />
+    </button>
+    <button
+      onClick={() => handleDeleteProduct(product.id)}
+      className="p-2 bg-[#FF724F] text-white rounded-md hover:bg-red-600"
+    >
+      <MdDelete />
+    </button>
+  </div>
+</td>
+
               </tr>
             ))}
           </tbody>
