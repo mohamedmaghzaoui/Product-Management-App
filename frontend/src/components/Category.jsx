@@ -64,7 +64,7 @@ export const Categories = () => {
         
           setShowModal(true);
         }}
-        className="button is-primary mb-4"
+        className="button is-success mb-4"
       >
         Ajouter une catégorie
       </button>
