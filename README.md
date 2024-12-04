@@ -2,7 +2,7 @@
 
 ## 📜 **Préambule**
 
-Bienvenue dans ma solution au test technique pour le poste d’alternant développeur full-stack chez Teach’r !
+
 
 Ce projet a pour objectif de démontrer mes compétences en **React.js** et **Symfony**. Il implique la création d'une application fullstack permettant de gérer des produits et des catégories via une API Symfony côté backend et un frontend en React.js.
 
@@ -265,6 +265,15 @@ Voici l'écran affichant qu'un produit a été modifié avec succès.
 
 ![Produit ajouté](screen-shots/produit_modifié.png)
 *Capture d'écran après la modification d'un produit.*
+
+# ⚠️ Affichage des messages d'erreur
+
+L'écran où vous pouvez voir les messages d'erreur.
+
+![Erreur 1](./screen-shots/error_msg_1.png) ![Erreur 2](./screen-shots/error_msg_2.png)
+
+Capture d'écran des messages d'erreur affichés.
+
 
 ## :mag: Rechercher un produit
 Voici l'écran où vous pouvez rechercher un produit.
