@@ -214,7 +214,8 @@ VITE_API_URL=http://localhost:8000
 
 - **DELETE** `/categories/{id}`: Supprime une catégorie.
   - **Response**: `200 OK` en cas de succès.
-#  captures d'écran
+# 📸 Capture d'écran
+
 
 ## :clipboard: Liste des produits et catégories
 Voici l'écran affichant la liste des produits et des catégories.
@@ -271,8 +272,8 @@ Voici l'écran où vous pouvez rechercher un produit.
 ![Rechercher un produit](screen-shots/rechercher_un_produit.png)
 *Capture d'écran de la fonction de recherche de produit.*
 
-## :arrows_counterclockwise: Trier les catégories
-Cette image montre l'écran où vous pouvez trier les catégories.
+## :arrows_counterclockwise: Trier par catégories
+Cette image montre l'écran où vous pouvez trier par catégories.
 
 ![Trier les catégories](screen-shots/tri_categorie.png)
 *Capture d'écran de l'écran de tri des catégories.*
