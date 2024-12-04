@@ -18,6 +18,12 @@ export const Products = () => {
   return (
     <div className="container me-9 ms-5 p-4">
       <h1 className="text-2xl font-bold mb-4">Liste des Produits</h1>
+      <button
+        
+        className="mb-4 bg-green-500 text-white p-2 rounded-md hover:bg-green-600"
+      >
+        Ajouter un produit
+      </button>
 
       {status === 'loading' && (
         <div className="flex justify-center">
