@@ -7,19 +7,19 @@ const CategoryForm = ({ showModal, isEditing,categoryId, setShowModal, handleAdd
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-8 rounded-lg shadow-lg w-1/3">
-        <h2 className="text-xl font-bold mb-4">{ isEditing ? "Modifier la catégorie" : "Ajouter une catégorie"}</h2>
+        <h2 className="xl:leading-[44px] xl:text-[32px] leading-[15px] text-[22px] text-first font-extrabold text-center mb-3 text-[#0054A3]">{ isEditing ? "Modifier la catégorie" : "Ajouter une catégorie"}</h2>
         <input
           type="text"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder="Nom de la catégorie"
-          className="w-full p-2 border rounded-md mb-4"
+          className="w-full p-2 border rounded-md mb-4 bg-[#F2F5FB] text-[#00000]"
         />
         {isError&& <p className="py-2 font-bold text-red-600 text-center">Veuillez remplir ce champ</p>}
         <div className="flex justify-between">
           <button
             onClick={() => setShowModal(false)}
-            className="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500"
+            className="bg-[#FF724F]  text-white text-xl font-semibold px-4 py-2 rounded-full"
           >
             Annuler
           </button>
@@ -40,7 +40,7 @@ const CategoryForm = ({ showModal, isEditing,categoryId, setShowModal, handleAdd
             
               
             }}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            className="bg-[#219CFF] text-white text-xl font-semibold px-4 py-2 rounded-full hover:bg-blue-400"
           >
             {isEditing ? "Modifier" : "Ajouter"}
           </button>

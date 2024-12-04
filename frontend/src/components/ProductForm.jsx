@@ -43,7 +43,7 @@ const ProductForm = ({ showModal, setShowModal, product, setProduct, handleSubmi
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-8 rounded-lg shadow-lg w-1/3">
-        <h2 className="text-xl font-bold mb-4">{isEditing ? "Modifier le produit" : "Ajouter un produit"}</h2>
+        <h2 className="xl:leading-[44px] xl:text-[32px] leading-[15px] text-[22px] text-first font-extrabold text-center mb-3 text-[#0054A3]">{isEditing ? "Modifier le produit" : "Ajouter un produit"}</h2>
         {error && <p className="text-red-600 text-sm font-bold mb-4">{error}</p>}
         <input
           required
@@ -52,14 +52,14 @@ const ProductForm = ({ showModal, setShowModal, product, setProduct, handleSubmi
           value={product.name}
           onChange={handleChange}
           placeholder="Nom du produit"
-          className="w-full p-2 border rounded-md mb-4"
+          className="w-full p-2 border rounded-md mb-4 bg-[#F2F5FB] text-[#00000]"
         />
         <textarea
           name="description"
           value={product.description}
           onChange={handleChange}
           placeholder="Description"
-          className="w-full p-2 border rounded-md mb-4"
+          className="w-full p-2 border rounded-md mb-4 bg-[#F2F5FB] text-[#00000]"
         />
         <input
           
@@ -68,7 +68,7 @@ const ProductForm = ({ showModal, setShowModal, product, setProduct, handleSubmi
           value={product.price}
           onChange={handleChange}
           placeholder="Prix"
-          className="w-full p-2 border rounded-md mb-4"
+          className="w-full p-2 border rounded-md mb-4 bg-[#F2F5FB] text-[#00000]"
           required
         />
         
@@ -77,11 +77,11 @@ const ProductForm = ({ showModal, setShowModal, product, setProduct, handleSubmi
             name="category"
             value={product.category.id}
             onChange={handleChange}
-            className="w-full p-2 border rounded-md mb-4"
+            className="w-full p-2 border rounded-md mb-4 bg-[#F2F5FB] text-[#00000]"
             >
-            <option value="">Sélectionnez une catégorie</option>
+            <option className='bg-[#F2F5FB] text-[#00000]' value="">Sélectionnez une catégorie</option>
             {categories.map((category) => (
-                <option key={category.id} value={category.id}>
+                <option className="bg-[#F2F5FB] text-[#00000]" key={category.id} value={category.id}>
                 {category.name}
                 </option>
             ))}
@@ -93,13 +93,13 @@ const ProductForm = ({ showModal, setShowModal, product, setProduct, handleSubmi
             onClick={() => 
                 {setError("")
                  setShowModal(false)}}
-            className="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500"
+            className="bg-[#FF724F]  text-white text-xl font-semibold px-4 py-2 rounded-full "
           >
             Annuler
           </button>
           <button
            onClick={onSubmit}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            className="bg-[#219CFF] text-white text-xl font-semibold px-4 py-2 rounded-full hover:bg-blue-400"
           >
             {isEditing ? "Modifier" : "Ajouter"}
           </button>
