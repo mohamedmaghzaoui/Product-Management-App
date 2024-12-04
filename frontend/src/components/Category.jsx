@@ -6,11 +6,13 @@ import { fetchCategories, createCategory, updateCategory, deleteCategory } from 
 import CategoryForm from './CategoryForm'; // Import the CategoryForm component
 
 export const Categories = () => {
+  //redux conf
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories.items);
   const status = useSelector((state) => state.categories.status);
-
+//state to change category name
   const [newCategoryName, setNewCategoryName] = useState('');
+  //state to pass category id to pop-up from
   const [categoryId,setCategoryId]=useState('')
 
   const [showModal, setShowModal] = useState(false);
@@ -22,7 +24,7 @@ export const Categories = () => {
     }
   }, [status, dispatch]);
 
-  // Function to handle adding a new category
+  // add new category
   const handleAddCategory = () => {
     if (newCategoryName.trim() !== '') {
       dispatch(createCategory({ name: newCategoryName }));
@@ -30,10 +32,10 @@ export const Categories = () => {
       setShowModal(false); // Close modal after adding
     }
   };
-
+//edit category
   const handleEditCategory = (id) => {
     if (newCategoryName.trim() !== '') {
-      // Dispatch the correct category data with the category id
+      
       
       dispatch(updateCategory({ id, categoryData: { name: newCategoryName } }));
       
@@ -43,7 +45,7 @@ export const Categories = () => {
   };
   
 
-  // Handle the delete action
+  // delete category
   const handleDeleteCategory = (categoryId) => {
     dispatch(deleteCategory(categoryId));
   };
@@ -54,6 +56,7 @@ export const Categories = () => {
 
       <button
         onClick={() => {
+          //set is edeting to false and render pop-up
           setIsEdeting(false)
         
           setShowModal(true);
@@ -72,6 +75,7 @@ export const Categories = () => {
               <th className="border-b-2 border-l-2 border-r-2 py-4 md:px-4 px-1 bg-[#EBF7FF]">Nom</th>
               <th className="border-b-2 border-l-2 border-r-2 py-4 md:px-4 px-1 bg-[#EBF7FF]">Action</th>
             </tr>
+            {/* render all categories in a table */}
           </thead>
           <tbody>
             {categories.map((category) => (
@@ -80,6 +84,7 @@ export const Categories = () => {
                 <td className="border-b-2 border-l-2 border-r-2 py-4 md:px-4 px-1 text-center">
                   <button
                     onClick={() => {
+                      //change category id to pass it to the child component
                       setCategoryId(category.id)
                       setIsEdeting(true)
                       setNewCategoryName(category.name)
@@ -104,7 +109,7 @@ export const Categories = () => {
         </table>
       )}
 
-      {/* Category Form Modal for adding or editing category */}
+      {/* Category Form pop-up */}
       <CategoryForm
         showModal={showModal}
         setShowModal={setShowModal}

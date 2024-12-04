@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
+//get api url from .env file
 const API_URL = import.meta.env.VITE_API_URL;
 
 
@@ -71,7 +71,7 @@ const productSlice = createSlice({
         }
       })
       .addCase(deleteProduct.fulfilled, (state, action) => {
-        state.items = state.items.filter(product => product.id !== action.payload); // Removes the deleted product
+        state.items = state.items.filter(product => product.id !== action.payload); // delete product
       });
   },
 });

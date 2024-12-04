@@ -1,4 +1,4 @@
-
+//import components
 import { Products } from "./components/Product";
 import { Categories } from "./components/Category";
 function App() {

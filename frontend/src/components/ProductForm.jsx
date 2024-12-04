@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchCategories } from '../redux/categorySlice'; // Adjust the path as needed
 
 const ProductForm = ({ showModal, setShowModal, product, setProduct, handleSubmit, isEditing }) => {
+  //redux to get list of categories
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories.items);
   const status = useSelector((state) => state.categories.status);
+  //handel error msg state
   const [error, setError] = useState('');
  
   useEffect(() => {
@@ -15,23 +17,26 @@ const ProductForm = ({ showModal, setShowModal, product, setProduct, handleSubmi
   }, [status, dispatch]);
 
   if (!showModal) return null;
-
+//handel change for product state
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProduct((prev) => ({ ...prev, [name]: value }));
   };
+  //verify the values 
   const validateForm = () => {
     // Check if any field is empty
     if (!product.name || !product.price || !product.category) {
       setError('Veuillez remplir tous les champs du formulaire.');
       return false;
     }
+    //price must be postive
     if(product.price<=0){
         setError('le prix doit être supérieur à 0.');
         return false;
     }
     return true;
   };
+  //submit product data
   const onSubmit = () => {
     if (validateForm()) {
       handleSubmit();
@@ -80,6 +85,7 @@ const ProductForm = ({ showModal, setShowModal, product, setProduct, handleSubmi
             className="w-full p-2 border rounded-md mb-4 bg-[#F2F5FB] text-[#00000]"
             >
             <option className='bg-[#F2F5FB] text-[#00000]' value="">Sélectionnez une catégorie</option>
+            {/* render all categories name */}
             {categories.map((category) => (
                 <option className="bg-[#F2F5FB] text-[#00000]" key={category.id} value={category.id}>
                 {category.name}
@@ -91,6 +97,7 @@ const ProductForm = ({ showModal, setShowModal, product, setProduct, handleSubmi
         <div className="flex justify-between">
           <button
             onClick={() => 
+              //reset error after closing the modal
                 {setError("")
                  setShowModal(false)}}
             className="bg-[#FF724F]  text-white text-xl font-semibold px-4 py-2 rounded-full "

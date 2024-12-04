@@ -6,10 +6,11 @@ import { fetchProducts, createProduct, updateProduct, deleteProduct } from '../r
 import ProductForm from './ProductForm'; // Import the ProductForm component
 
 export const Products = () => {
+  //redux conf
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.items);
   const status = useSelector((state) => state.products.status);
-
+//state to manage editing or adding products
   const [currentProduct, setCurrentProduct] = useState({
     id: '',
     name: '',
@@ -47,7 +48,7 @@ export const Products = () => {
       }
     }));
   
-    // Reset the form after the update
+    // Reset the form 
     resetForm();
   };
   
@@ -55,7 +56,7 @@ export const Products = () => {
   const handleDeleteProduct = (productId) => {
     dispatch(deleteProduct(productId));
   };
-
+//reset product state and hide modal
   const resetForm = () => {
     setCurrentProduct({
       id: '',
@@ -74,6 +75,7 @@ export const Products = () => {
 
       <button
         onClick={() => {
+          //reset the product state
           resetForm();
           setShowModal(true);
         }}
@@ -84,7 +86,9 @@ export const Products = () => {
 
       {status === 'loading' && <div className="flex justify-center"><div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div></div>}
       {status === 'failed' && <p>Erreur lors du chargement des produits.</p>}
+      {/* render products in a table*/}
       {status === 'succeeded' && (
+
         <table className="table-auto border-2 rounded-t-3xl shadow-md text-[#4D4D4D] w-full">
           <thead>
             <tr>
@@ -106,6 +110,7 @@ export const Products = () => {
 
                 <td className="border-b-2 border-l-2 border-r-2 py-4 px-2 text-center">
                   <button
+                  //pass the current product to the editing form
                     onClick={() => {
                       setCurrentProduct(product);
                       setIsEditing(true);
@@ -128,13 +133,13 @@ export const Products = () => {
         </table>
       )}
 
-      {/* Product Form Modal */}
+      {/* Product Form Pop up*/}
       <ProductForm
         showModal={showModal}
         setShowModal={setShowModal}
         product={currentProduct}
         setProduct={setCurrentProduct}
-        handleSubmit={isEditing ? handleEditProduct : handleAddProduct}
+        handleSubmit={isEditing ? handleEditProduct : handleAddProduct} //edit or add product 
         isEditing={isEditing}
       />
     </div>

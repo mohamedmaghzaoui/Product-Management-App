@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-
+import  { useState } from 'react';
+//get all props
 const CategoryForm = ({ showModal, isEditing,categoryId, setShowModal, handleAddCategory, handleEditCategory, value, setValue }) => {
   if (!showModal) return null;
+  //state for handeling error msg
   const [isError,setIsError]=useState(false)
 
   return (
@@ -11,28 +12,30 @@ const CategoryForm = ({ showModal, isEditing,categoryId, setShowModal, handleAdd
         <input
           type="text"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => setValue(e.target.value)}//change category name
           placeholder="Nom de la catégorie"
           className="w-full p-2 border rounded-md mb-4 bg-[#F2F5FB] text-[#00000]"
         />
         {isError&& <p className="py-2 font-bold text-red-600 text-center">Veuillez remplir ce champ</p>}
         <div className="flex justify-between">
           <button
+          //close the popup
             onClick={() => setShowModal(false)}
             className="bg-[#FF724F]  text-white text-xl font-semibold px-4 py-2 rounded-full"
           >
             Annuler
           </button>
           <button
+          //if value is empty render error msg
             onClick={() => {
               if (!value) {
                 setIsError(true)
                 
               }else{
                 if (isEditing) {
-                  handleEditCategory(categoryId); // Add category if the form is for adding
+                  handleEditCategory(categoryId); // ddd category if the form is for adding
                 } else {
-                  handleAddCategory(); // Edit category if the form is for editing
+                  handleAddCategory(); // edit category if the form is for editing
                 }
 
               }
