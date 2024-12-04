@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const CategoryForm = ({ showModal, isEditing,categoryId, setShowModal, handleAddCategory, handleEditCategory, value, setValue }) => {
   if (!showModal) return null;
+  const [isError,setIsError]=useState(false)
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
@@ -14,6 +15,7 @@ const CategoryForm = ({ showModal, isEditing,categoryId, setShowModal, handleAdd
           placeholder="Nom de la catégorie"
           className="w-full p-2 border rounded-md mb-4"
         />
+        {isError&& <p className="py-2 font-bold text-red-600 text-center">Veuillez remplir ce champ</p>}
         <div className="flex justify-between">
           <button
             onClick={() => setShowModal(false)}
@@ -23,12 +25,19 @@ const CategoryForm = ({ showModal, isEditing,categoryId, setShowModal, handleAdd
           </button>
           <button
             onClick={() => {
-              
+              if (!value) {
+                setIsError(true)
+                
+              }else{
                 if (isEditing) {
                   handleEditCategory(categoryId); // Add category if the form is for adding
                 } else {
                   handleAddCategory(); // Edit category if the form is for editing
                 }
+
+              }
+              
+            
               
             }}
             className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"

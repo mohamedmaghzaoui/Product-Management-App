@@ -32,10 +32,25 @@ export const Products = () => {
   };
 
   const handleEditProduct = () => {
-    console.log(currentProduct)
-    dispatch(updateProduct({ id: currentProduct.id, productData: currentProduct }));
+    console.log(currentProduct);
+  
+    // Check if currentProduct.category is an object 
+    const categoryId = currentProduct.category && typeof currentProduct.category === 'object' 
+      ? currentProduct.category.id // If it's an object, use the id 
+      : currentProduct.category;   // If it's not an object, use the value 
+  
+    dispatch(updateProduct({
+      id: currentProduct.id,
+      productData: {
+        ...currentProduct,
+        category: categoryId // Set the category to the correct id 
+      }
+    }));
+  
+    // Reset the form after the update
     resetForm();
   };
+  
 
   const handleDeleteProduct = (productId) => {
     dispatch(deleteProduct(productId));
