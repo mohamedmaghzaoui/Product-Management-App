@@ -5,18 +5,28 @@ import { fetchCategories } from '../redux/categorySlice'; // Adjust the path as 
 const ProductForm = ({ showModal, setShowModal, product, setProduct, handleSubmit, isEditing }) => {
   //redux to get list of categories
   const dispatch = useDispatch();
+  //state for animation
+  const [isVisible, setIsVisible] = useState(false);
   const categories = useSelector((state) => state.categories.items);
   const status = useSelector((state) => state.categories.status);
   //handel error msg state
   const [error, setError] = useState('');
- 
+   // Handle visibility state for animation
+   useEffect(() => {
+    if (showModal) {
+      setIsVisible(true);
+    } else {
+      const timer = setTimeout(() => setIsVisible(false), 300); // animation duration
+      return () => clearTimeout(timer);
+    }
+  }, [showModal]);
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchCategories());
     }
   }, [status, dispatch]);
 
-  if (!showModal) return null;
+  if (!showModal && !isVisible) return null;
 //handel change for product state
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,7 +57,7 @@ const ProductForm = ({ showModal, setShowModal, product, setProduct, handleSubmi
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-1/3">
+      <div className={`bg-white p-8 rounded-lg shadow-lg w-1/3 transform transition-all duration-300 ${showModal ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <h2 className="xl:leading-[44px] xl:text-[32px] leading-[15px] text-[22px] text-first font-extrabold text-center mb-3 text-[#0054A3]">{isEditing ? "Modifier le produit" : "Ajouter un produit"}</h2>
         {error && <p className="text-red-600 text-sm font-bold mb-4">{error}</p>}
         <input
