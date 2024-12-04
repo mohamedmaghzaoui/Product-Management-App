@@ -79,7 +79,7 @@ export const Products = () => {
           resetForm();
           setShowModal(true);
         }}
-        className="mb-4 bg-green-500 text-white p-2 rounded-md hover:bg-green-600"
+        className="mb-4 button is-success"
       >
         Ajouter un produit
       </button>
@@ -89,7 +89,7 @@ export const Products = () => {
       {/* render products in a table*/}
       {status === 'succeeded' && (
 
-        <table className="table-auto border-2 rounded-t-3xl shadow-md text-[#4D4D4D] w-full">
+        <table className="table-auto border-2 text-center  rounded-t-3xl shadow-md text-[#4D4D4D] w-full">
           <thead>
             <tr>
               <th className="border-b-2 border-l-2 border-r-2 py-4 px-2 bg-[#EBF7FF]">Nom</th>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaEdit } from "react-icons/fa";
+
 import { MdDelete } from "react-icons/md";
 import { fetchCategories, createCategory, updateCategory, deleteCategory } from '../redux/categorySlice';
 import CategoryForm from './CategoryForm'; // Import the CategoryForm component
@@ -53,6 +54,8 @@ export const Categories = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Liste des Catégories</h1>
+   
+   
 
       <button
         onClick={() => {
@@ -61,7 +64,7 @@ export const Categories = () => {
         
           setShowModal(true);
         }}
-        className="mb-4 bg-green-500 text-white p-2 rounded-md hover:bg-green-600"
+        className="button is-primary mb-4"
       >
         Ajouter une catégorie
       </button>
@@ -69,7 +72,7 @@ export const Categories = () => {
       {status === 'loading' && <div className="flex justify-center"><div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div></div>}
       {status === 'failed' && <p>Erreur lors du chargement des catégories.</p>}
       {status === 'succeeded' && (
-        <table className="table-auto border-2 rounded-t-3xl shadow-md text-[#4D4D4D] w-full">
+        <table className="table-auto border-2 rounded-t-3xl text-center shadow-md text-[#4D4D4D] w-full">
           <thead>
             <tr>
               <th className="border-b-2 border-l-2 border-r-2 py-4 md:px-4 px-1 bg-[#EBF7FF]">Nom</th>
